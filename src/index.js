@@ -1,28 +1,52 @@
-import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-
 import './config/ReactotronConfig';
 import './config/DevToolsConfig';
 
-import Post from '~/components/Post';
+import React, { Component } from 'react';
+import { View, ScrollView, Text } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
+import Post from '~/components/Post';
+import styles from './styles';
 
 export default class App extends Component {
-  state = {};
+  state = {
+    posts: [
+      {
+        id: 1,
+        title: 'Estudy React Native',
+        author: 'Ian Carlos',
+        text: 'Estudy the first module',
+      },
+      {
+        id: 2,
+        title: 'Finish the challenge',
+        author: 'Ian Carlos',
+        text:
+          'Finish the fist challenge. After that I ll able to complete the first module',
+      },
+      {
+        id: 3,
+        title: 'Send the email',
+        author: 'Carlos Reis',
+        text: 'Send the test to my teacher',
+      },
+    ],
+  };
 
   render() {
+    const { posts } = this.state;
     return (
       <View style={styles.container}>
-        <Post title="Estudy GoNative" />
-        <Post title="Estudy React" />
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>GoNative App</Text>
+        </View>
+        <ScrollView>
+          {posts.map(post => (
+            <Post
+              key={post.id}
+              data={post}
+            />
+          ))}
+        </ScrollView>
       </View>
     );
   }
